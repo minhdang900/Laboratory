@@ -1,0 +1,32 @@
+{
+  "name": "core_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "cors": "^2.8.1",
+    "diet": "^0.15.0",
+    "express": "^4.15.2",
+    "formidable": "^1.1.1",
+    "fs": "^0.0.1-security",
+    "fs-extra": "^2.0.0",
+    "geocoder": "^0.2.3",
+    "html-entities": "^1.2.0",
+    "https": "^1.0.0",
+    "mv": "^2.1.1",
+    "node-dir": "^0.1.16",
+    "node-ffprobe": "^1.2.2",
+    "nodemailer": "^3.1.4",
+    "nodemailer-smtp-transport": "^2.7.2",
+    "request": "^2.80.0",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "DangTM",
+  "license": "ISC"
+}
