@@ -22,7 +22,7 @@ window.Home = React.createClass({
 				            <div className="page-breadcrumb">
 				                <ol className="breadcrumb">
 				                    <li><ReactRouterDOM.Link to="/home">Home</ReactRouterDOM.Link></li>
-				                    <li><ReactRouterDOM.Link to="/home">Layouts</a></li>
+				                    <li><ReactRouterDOM.Link to="/home">Layouts</ReactRouterDOM.Link></li>
 				                    <li className="active">Blank Page</li>
 				                </ol>
 				            </div>
