@@ -3,7 +3,7 @@ window.Home = React.createClass({
 	componentWillMount: function(){
 	},
 	componentDidMount: function(){
-		console.log(this);	
+		
 	},
 	componentWillUnmount: function(){
 		
