@@ -113,6 +113,23 @@ window.Header = React.createClass({
 		                          		<p style={{"margin-bottom": "0px"}}>Dashboard</p>
 		                          	</ReactRouterDOM.Link>
 		                          </li>
+		                          <li className="dropdown">
+		                              <ReactRouterDOM.Link to="#" className="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown" 
+		                              	style={{"padding": "10px 18px", "text-align": "center" }}>
+		                          		<span className="menu-icon glyphicon glyphicon-briefcase"></span>
+		                          		<p style={{"margin-bottom": "0px"}}>UI Kits</p>
+		                              </ReactRouterDOM.Link>
+		                              <ul className="dropdown-menu dropdown-list" role="menu">
+		                                  <li role="presentation"><ReactRouterDOM.Link to="/alert"><i className="fa fa-building" aria-hidden="true"></i>Alert</ReactRouterDOM.Link></li>
+		                                  <li role="presentation"><ReactRouterDOM.Link to="/panel"><i className="fa fa-building" aria-hidden="true"></i>Panel</ReactRouterDOM.Link></li>
+		                                  <li role="presentation"><ReactRouterDOM.Link to="/button"><i className="fa fa-building" aria-hidden="true"></i>Button</ReactRouterDOM.Link></li>
+		                                  <li role="presentation"><ReactRouterDOM.Link to="/tab"><i className="fa fa-building" aria-hidden="true"></i>Tab Accordions</ReactRouterDOM.Link></li>
+		                                  <li role="presentation"><ReactRouterDOM.Link to="/toast"><i className="fa fa-building" aria-hidden="true"></i> Toast</ReactRouterDOM.Link></li>
+		                                  <li role="presentation"><ReactRouterDOM.Link to="/inbox"><i className="fa fa-building" aria-hidden="true"></i> Inbox</ReactRouterDOM.Link></li>
+		                                  <li role="presentation"><ReactRouterDOM.Link to="/form"><i className="fa fa-building" aria-hidden="true"></i> Form</ReactRouterDOM.Link></li>
+		                                  <li role="presentation"><ReactRouterDOM.Link to="/cropper"><i className="fa fa-building" aria-hidden="true"></i> Cropper</ReactRouterDOM.Link></li>
+		                              </ul>
+		                          </li>
 		                      </ul>
 		                      <ul className="nav navbar-nav navbar-right">
 		                          <li className="dropdown">
