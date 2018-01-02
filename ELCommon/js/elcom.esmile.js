@@ -12,9 +12,8 @@ ReactDOM.render((
 		   	  <ReactRouterDOM.Route path="/form" component={Form}/>
 		   	  <ReactRouterDOM.Route path="/cropper" component={Cropper}/>
 		   	  <ReactRouterDOM.Route path="/login" component={Login}/>
-			  <ReactRouterDOM.Route path="/home" component={Home}/>
 		    </div>
-</ReactRouterDOM.HashRouter>), document.getElementById('elcom_esmile_version02'));
+</ReactRouterDOM.HashRouter>), document.getElementById('elcom_esmile_iot'));
 /**
  * 
  * 
