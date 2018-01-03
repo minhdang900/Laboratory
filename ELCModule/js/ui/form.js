@@ -3,7 +3,9 @@ window.Form = React.createClass({
 	componentWillMount: function(){
 	},
 	componentDidMount: function(){
-		$('select').select2();
+		/*$('select').select2().on('change', function() {
+			alert('OK');
+		});*/
 		    
 		    $(".js-example-basic-multiple-limit").select2({
 		        maximumSelectionLength: 2
@@ -19,9 +21,13 @@ window.Form = React.createClass({
 		    $(".js-example-data-array").select2({
 		        data: data
 		    });
+			
 	},
 	componentWillUnmount: function(){
 		
+	},
+	handleChange : function(){
+		alert("OK");
 	},
 	render: function(){
 		return (
@@ -47,7 +53,19 @@ window.Form = React.createClass({
 		                        <div className="col-md-12">
 		                            <div className="panel panel-white">
 		                                <div className="panel-body">
-		                                    <h4 className="no-m m-b-sm">Basic</h4>
+		                                    <h4 className="no-m m-b-sm">Library</h4>
+											<Select
+												name="select-field-name"
+												multiple={false}
+												onChange={this.handleChange}
+												options={[{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]}/>
+											<h4 className="no-m m-b-sm">Library Multiple</h4>
+											<Select
+												name="select-multiple-name"
+												multiple={true}
+												onChange={this.handleChange}
+												options={[{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }]}/>
+											<h4 className="no-m m-b-sm">Basic</h4>
 		                                    <select className="js-states form-control" tabindex="-1" style={{"display": "none", "width": "100%"}}>
 		                                        <optgroup label="Alaskan/Hawaiian Time Zone">
 		                                            <option value="AK">Alaska</option>

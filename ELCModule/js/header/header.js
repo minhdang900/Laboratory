@@ -127,6 +127,7 @@ window.Header = React.createClass({
 		                                  <li role="presentation"><ReactRouterDOM.Link to="/toast"><i className="fa fa-building" aria-hidden="true"></i> Toast</ReactRouterDOM.Link></li>
 		                                  <li role="presentation"><ReactRouterDOM.Link to="/inbox"><i className="fa fa-building" aria-hidden="true"></i> Inbox</ReactRouterDOM.Link></li>
 		                                  <li role="presentation"><ReactRouterDOM.Link to="/form"><i className="fa fa-building" aria-hidden="true"></i> Form</ReactRouterDOM.Link></li>
+										  <li role="presentation"><ReactRouterDOM.Link to="/form-element"><i className="fa fa-building" aria-hidden="true"></i> Form Element</ReactRouterDOM.Link></li>
 		                                  <li role="presentation"><ReactRouterDOM.Link to="/cropper"><i className="fa fa-building" aria-hidden="true"></i> Cropper</ReactRouterDOM.Link></li>
 		                              </ul>
 		                          </li>

@@ -10,6 +10,7 @@ ReactDOM.render((
 		      <ReactRouterDOM.Route path="/toast" component={Toast}/>
 		   	  <ReactRouterDOM.Route path="/inbox" component={Inbox}/>
 		   	  <ReactRouterDOM.Route path="/form" component={Form}/>
+			   <ReactRouterDOM.Route path="/form-element" component={FormElement}/>
 		   	  <ReactRouterDOM.Route path="/cropper" component={Cropper}/>
 		   	  <ReactRouterDOM.Route path="/login" component={Login}/>
 			  <ReactRouterDOM.Route path="/home" component={Home}/>
