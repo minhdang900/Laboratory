@@ -153,7 +153,7 @@ $( document ).ready(function() {
             }
         ];
         
-        var ticks = [[0, "1"], [1, "2"], [2, "3"], [3, "4"], [4, "5"], [5, "6"], [6, "7"], [7, "8"]];
+        var ticks = [[0, "1A"], [1, "2A"], [2, "3A"], [3, "4A"], [4, "5A"], [5, "6A"], [6, "7A"], [7, "8A"]];
 
         var plot1 = $.plot("#flotchart1", dataset, {
             series: {

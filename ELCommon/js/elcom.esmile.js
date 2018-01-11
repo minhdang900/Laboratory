@@ -1,19 +1,16 @@
 'use strict';
 ReactDOM.render((
 		   <ReactRouterDOM.HashRouter>
-		   	<div>
-		   	  <ReactRouterDOM.Route path="/" component={Home}/>
-		      <ReactRouterDOM.Route path="/alert" component={Alert}/>
-		      <ReactRouterDOM.Route path="/panel" component={Panel}/>
-		      <ReactRouterDOM.Route path="/button" component={Button}/>
-		      <ReactRouterDOM.Route path="/tab" component={Tab}/>
-		      <ReactRouterDOM.Route path="/toast" component={Toast}/>
-		   	  <ReactRouterDOM.Route path="/inbox" component={Inbox}/>
-		   	  <ReactRouterDOM.Route path="/form" component={Form}/>
-		   	  <ReactRouterDOM.Route path="/cropper" component={Cropper}/>
-		   	  <ReactRouterDOM.Route path="/login" component={Login}/>
-		    </div>
-</ReactRouterDOM.HashRouter>), document.getElementById('elcom_esmile_iot'));
+			   	<div>
+				  {/*<ReactRouterDOM.Route exact path="/" render={() => (
+				   			true ?(<ReactRouter.Redirect to="/dashboard"/>) : (<Login />)
+				  )}/>*/}
+				  <ReactRouterDOM.Route exact path="/" component={Router}/>
+				  <ReactRouterDOM.Route path="/login" component={Login}/>
+				  <ReactRouterDOM.Route path="/dashboard" component={Home}/>
+				  <ReactRouterDOM.Route path="/report" component={Report}/>
+			    </div>
+		  </ReactRouterDOM.HashRouter>), document.getElementById('elcom_esmile_iot'));
 /**
  * 
  * 

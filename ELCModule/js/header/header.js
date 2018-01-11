@@ -29,7 +29,7 @@ window.Header = React.createClass({
 		                          <li>		
 		                              <ReactRouterDOM.Link to="javascript:void(0);" className="waves-effect waves-button waves-classic toggle-fullscreen"><i className="fa fa-expand"></i></ReactRouterDOM.Link>
 		                          </li>
-		                          <li className="dropdown">
+		                          {/*<li className="dropdown">
 		                              <ReactRouterDOM.Link to="#" className="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">
 		                                  <i className="fa fa-cogs"></i>
 		                              </ReactRouterDOM.Link>
@@ -105,15 +105,22 @@ window.Header = React.createClass({
 		                                  </li>
 		                                  <li className="no-link"><button className="btn btn-default reset-options">Reset Options</button></li>
 		                              </ul>
-		                          </li>
+		                          </li>*/}
 		                          <li>
-		                           <ReactRouterDOM.Link to="/home" className="waves-effect waves-button waves-classic" 
+		                           <ReactRouterDOM.Link to="/dashboard" className="waves-effect waves-button waves-classic" 
 		                          		style={{"padding": "10px 18px", "text-align": "center" }}>
 		                          		<span className="menu-icon glyphicon glyphicon-home"></span>
 		                          		<p style={{"margin-bottom": "0px"}}>Dashboard</p>
 		                          	</ReactRouterDOM.Link>
 		                          </li>
-		                          <li className="dropdown">
+		                          <li>
+		                           <ReactRouterDOM.Link to="/report" className="waves-effect waves-button waves-classic" 
+		                          		style={{"padding": "10px 18px", "text-align": "center" }}>
+		                          		<span className="menu-icon"><i className="fa fa-line-chart" aria-hidden="true"></i></span>
+		                          		<p style={{"margin-bottom": "0px"}}>Report</p>
+		                          	</ReactRouterDOM.Link>
+		                          </li>
+		                          {/*<li className="dropdown">
 		                              <ReactRouterDOM.Link to="#" className="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown" 
 		                              	style={{"padding": "10px 18px", "text-align": "center" }}>
 		                          		<span className="menu-icon glyphicon glyphicon-briefcase"></span>
@@ -129,7 +136,7 @@ window.Header = React.createClass({
 		                                  <li role="presentation"><ReactRouterDOM.Link to="/form"><i className="fa fa-building" aria-hidden="true"></i> Form</ReactRouterDOM.Link></li>
 		                                  <li role="presentation"><ReactRouterDOM.Link to="/cropper"><i className="fa fa-building" aria-hidden="true"></i> Cropper</ReactRouterDOM.Link></li>
 		                              </ul>
-		                          </li>
+		                          </li> */}
 		                      </ul>
 		                      <ul className="nav navbar-nav navbar-right">
 		                          <li className="dropdown">

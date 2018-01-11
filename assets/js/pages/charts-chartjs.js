@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-    
     var ctx1 = document.getElementById("chart1").getContext("2d");
     var data1 = {
         labels: ["January", "February", "March", "April", "May", "June", "July"],

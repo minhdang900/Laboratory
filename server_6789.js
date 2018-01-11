@@ -63,7 +63,7 @@ app.get('/template/content/*', function(req, res){
  */
 
 app.get('/admin',function(req,res){
-	res.sendFile(path.join(__dirname,'blank.html'));
+	res.sendFile(path.join(__dirname,'dashboard.html'));
 });
 app.get('/',function(req,res){
   res.sendFile(path.join(__dirname,'blank.html'));
