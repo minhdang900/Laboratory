@@ -9,22 +9,36 @@ window.HighCharts = React.createClass({
 	  // Set up initial state
 	  getInitialState: function() {
 	    return {
-	      
 	    };
 	  },
 	  componentDidMount: function(){
-		  Highcharts.chart(this.props.id, {
+
+	  },
+	  componentWillMount: function(){
+		  
+	  },
+	  componentWillUpdate: function(nextProps, nextState){
+		  if(nextProps.type =="bar"){
+			  this.barChart({id: nextProps.id, valueSuffix: nextProps.valueSuffix, categories: nextProps.categories, series: nextProps.data, title: nextProps.title, yAxis: nextProps.yAxis});
+		  } else if(nextProps.type == "area"){
+			  this.areaChart({id: nextProps.id, valueSuffix: nextProps.valueSuffix, categories: nextProps.categories, series: nextProps.data, title: nextProps.title, yAxis: nextProps.yAxis});
+		  } else {
+			  this.chart({type: nextProps.type, id: nextProps.id, valueSuffix: nextProps.valueSuffix, categories: nextProps.categories, series: nextProps.data, title: nextProps.title, yAxis: nextProps.yAxis});
+		  }
+	  },
+	  chart: function(obj){
+		  var chart = Highcharts.chart(obj.id, {
 			    chart: {
-			        type: 'bar'
+			        type: obj.type
 			    },
 			    title: {
-			        text: 'Historic World Population by Region'
+			        text: obj.title
 			    },
 			    subtitle: {
-			        text: 'Source:'
+			        text: ''
 			    },
 			    xAxis: {
-			        categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+			        categories: obj.categories,
 			        title: {
 			            text: null
 			        }
@@ -32,7 +46,7 @@ window.HighCharts = React.createClass({
 			    yAxis: {
 			        min: 0,
 			        title: {
-			            text: 'Population (millions)',
+			            text: obj.yAxis,
 			            align: 'high'
 			        },
 			        labels: {
@@ -40,7 +54,8 @@ window.HighCharts = React.createClass({
 			        }
 			    },
 			    tooltip: {
-			        valueSuffix: ' millions'
+			        valueSuffix: obj.valueSuffix,
+//			        pointFormat: '{series.name} wait <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
 			    },
 			    plotOptions: {
 			        bar: {
@@ -49,26 +64,135 @@ window.HighCharts = React.createClass({
 			            }
 			        }
 			    },
-			    legend: {
-			        layout: 'vertical',
-			        align: 'right',
-			        verticalAlign: 'top',
-			        x: -40,
-			        y: 80,
-			        floating: true,
-			        borderWidth: 1,
-			        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-			        shadow: true
+			    plotOptions: {
+			        area: {
+			            marker: {
+			                enabled: false,
+			                symbol: 'circle',
+			                radius: 2,
+			                states: {
+			                    hover: {
+			                        enabled: true
+			                    }
+			                }
+			            }
+			        }
 			    },
 			    credits: {
 			        enabled: false
 			    },
-			    series: this.props.data
+			    series: obj.series
+			});  
+	  },
+	  barChart: function(obj){
+		  var chart = Highcharts.chart(obj.id, {
+			    chart: {
+			        type: 'bar'
+			    },
+			    title: {
+			        text: obj.title
+			    },
+			    subtitle: {
+			        text: ''
+			    },
+			    xAxis: {
+			        categories: obj.categories,
+			        title: {
+			            text: null
+			        }
+			    },
+			    yAxis: {
+			        min: 0,
+			        title: {
+			            text: obj.yAxis,
+			            align: 'high'
+			        },
+			        labels: {
+			            overflow: 'justify'
+			        }
+			    },
+			    tooltip: {
+			        valueSuffix: obj.valueSuffix,
+//			        pointFormat: '{series.name} wait <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
+			    },
+			    plotOptions: {
+			        bar: {
+			            dataLabels: {
+			                enabled: true
+			            }
+			        }
+			    },
+			    plotOptions: {
+			        area: {
+			            marker: {
+			                enabled: false,
+			                symbol: 'circle',
+			                radius: 2,
+			                states: {
+			                    hover: {
+			                        enabled: true
+			                    }
+			                }
+			            }
+			        }
+			    },
+			    credits: {
+			        enabled: false
+			    },
+			    series: obj.series
+			});  
+	  },
+	  areaChart: function(obj){
+		  Highcharts.chart(obj.id, {
+			    chart: {
+			        type: 'area'
+			    },
+			    title: {
+			        text: obj.title
+			    },
+			    subtitle: {
+			        text: ''
+			    },
+			    xAxis: {
+			        allowDecimals: false,
+			        categories: obj.categories,
+//			        labels: {
+//			            formatter: function () {
+//			                return this.value; // clean, unformatted number for year
+//			            }
+//			        }
+			    },
+			    yAxis: {
+			    	min: 0,
+			        title: {
+			            text: obj.yAxis
+			        },
+			        labels: {
+			            formatter: function () {
+			                return this.value;
+			            }
+			        }
+			    },
+			    tooltip: {
+			        pointFormat: '{series.name} <b>{point.y:,.0f} times</b>'
+			    },
+			    plotOptions: {
+			        area: {
+			            marker: {
+			                enabled: false,
+			                symbol: 'circle',
+			                radius: 2,
+			                states: {
+			                    hover: {
+			                        enabled: true
+			                    }
+			                }
+			            }
+			        }
+			    },
+			    series: obj.series
 			});
 	  },
-	  componentWillMount: function(){
-		  
-	  }
 	  render: function(){
 		   return (
 				 <div id={this.props.id}></div>

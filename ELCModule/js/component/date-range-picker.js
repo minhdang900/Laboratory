@@ -21,8 +21,8 @@ window.DateRangePicker = React.createClass({
 		    var end = moment();
 		    var _=this;
 		    function cb(start, end) {
-		        $('#'+ _.props.id + ' span').html(start.format('DD/MM/YYYY h:mm A') + ' - ' + end.format('DD/MM/YYYY h:mm A'));
-		        console.log("Callback");
+		        $('#'+ _.props.id + ' span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
+		        _.props.onChange(start, end);
 		    }
 		    $('#'+ this.props.id).daterangepicker({
 		        startDate: start,
@@ -35,10 +35,10 @@ window.DateRangePicker = React.createClass({
 		           'This Month': [moment().startOf('month'), moment().endOf('month')],
 		           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
 		        },
-		        timePicker: true,
+		        timePicker: false,
 		        timePickerIncrement: 30,
 		        locale: {
-		            format: 'DD/MM/YYYY h:mm A'
+		            format: 'DD/MM/YYYY'//'DD/MM/YYYY h:mm A'
 		        }
 		    }, cb);
 		    cb(start, end);
@@ -51,8 +51,8 @@ window.DateRangePicker = React.createClass({
 	  },
 	  render: function(){
 		  return(
-				  <div id={this.props.id} className="pull-right" 
-				  	style={{"background": "#fff", "cursor": "pointer", "padding": "7px 10px", "border": "1px solid #ccc", "width": "100%"}}>
+				  <div id={this.props.id} className="pull-left" 
+				  	style={{"background": "#fff", "text-align": "center", "cursor": "pointer", "padding": "6px 10px", "border": "1px solid #ccc", "width": "auto"}}>
 				    <i className="fa fa-calendar"></i>&nbsp;
 				    <span></span> <b className="caret"></b>
 				  </div>

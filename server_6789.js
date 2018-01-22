@@ -5,10 +5,14 @@
 var express = require("express");
 var request = require('request');
 var app     = express();
+var server = require('http').createServer(app);  
+var io = require('socket.io')(server);
 var path    = require("path");
 var cors = require("cors");
 var fs = require("fs");
-var geocoder = require('geocoder');
+//var redis = require("redis");
+//var client = redis.createClient();
+var client = {}; // use instead of use redis
 //var file = require('./core-file');
 var urlRoot = require('url');
 var bodyparser = require('body-parser');
@@ -16,6 +20,7 @@ app.use(bodyparser.urlencoded({extended: true}));
 app.use(bodyparser.json());
 app.use(cors());
 app.use(express.static(__dirname));
+
 /**
 Start Handle HTMT Template Page
 **/
@@ -71,23 +76,73 @@ app.get('/',function(req,res){
 app.post('/upload', function(req, res){
 	file.upload(req, res);
 });
-app.get('/getHTML', function(req, res){
-    var url = req.query.url;
-    console.log(urlRoot.parse(url).hostname);
-    request.get(url,
-                    function(error, response, body){
-            res.charset = 'UTF-8';
-            body = body.replace(/href="/g, 'href="'+url+'');
-            body = body.replace(/src="/g, 'href="'+url+'');
-            res.send(body);
-    });
-});
-
-app.get('/languages/text/:code', function(req, res){
-	var code = req.params.code;
-	res.charset = 'UTF-8';
-	res.sendFile(path.join(__dirname,'ELCommon/language/text_' + code + '.json'));
-});
-var server = app.listen(6789, function(){
+io.sockets.on('connection', function(socket){
+	  console.log(client);
+	  socket.on('disconnect', function () {
+			console.log('socket.io is disconnected');
+	  });
+	  socket.on('user', function(username){
+	      // save username 
+		  console.log(username + ' log into web with socket ' + socket.id);
+//		  client.set(username, socket.id, function(err) {
+//		      if (err) throw err;
+//		      console.log(username + "socket is now" + socket.id);
+//		  });
+		  // add username
+		  client[username] = socket.id;
+	  });
+	  socket.on("service", function(data) {
+	    // Fetch the socket id from Redis
+//	    client.get(data.username, function(err, socketId) { 
+//	      if (err) throw err;
+//	      io.sockets.socket(socketId).emit('service', data);
+//	    }); 
+		  console.log('Input >>', data);
+		  request({
+			    url: 'http://172.16.9.188:8123/esmile_iot/admin/getrealtime',
+			    method: 'POST',
+			    body: JSON.stringify(data),
+//			    json: true,
+			    headers: {'Content-Type':'application/json'},
+			  }, function(error, response, body){
+					if(error){
+						return error;
+					} else {
+						console.log(body);
+						console.log(response);
+						//var data = JSON.parse(body);
+						if(data.status_code == 200){
+							var socketId = client[data.username];
+							io.sockets.socket(socketId).emit('service', data); 
+						}
+					}
+	    		});
+	  });
+	  socket.on("quickstats", function(data) {
+	    // Fetch the socket id from Redis
+//	    client.get(data.username, function(err, socketId) {
+//	      if (err) throw err;
+//	      io.sockets.socket(socketId).emit('quickstats', data);
+//	    });
+//		  console.log('Input >>', data);
+//		  request.post('http://172.16.9.188:8123/esmile_iot/admin/getquickstats', 
+//			    {form: data}, 
+//				function(error, response, body){
+//					if(error){
+//						console.log(error);
+//						return;
+//					} else {
+//						console.log(body);
+//						var data = JSON.parse(body);
+//						if(data.status_code == 200){
+//							 var socketId = client[data.username];
+//							 io.sockets.socket(socketId).emit('quickstats', data);
+//						}
+//					}
+//	    		});
+		 
+	  });
+	});
+server.listen(6780, function(){
 	console.log('Server listening on port ' + server.address().port);
 });

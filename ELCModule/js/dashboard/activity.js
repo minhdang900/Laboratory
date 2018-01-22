@@ -3,6 +3,25 @@ window.Activity = React.createClass({
 	componentWillMount: function(){
 	},
 	componentDidMount: function(){
+		// Panel Control
+		$('.panel-collapse').click(function(){
+		    $(this).closest(".panel").children('.panel-body').slideToggle('fast');
+		});
+		$('.panel-reload').click(function() { 
+		    var el = $(this).closest(".panel").children('.panel-body');
+		    common.blockUI(el);
+		    window.setTimeout(function () {
+		        common.unblockUI(el);
+		    }, 1000);
+
+		}); 
+
+		$('.panel-remove').click(function(){
+		    $(this).closest(".panel").hide();
+		});
+	},
+	componentWillUpdate: function(nextProps, nextState){
+		
 	},
 	componentWillUnmount: function(){
 	},
@@ -17,54 +36,18 @@ window.Activity = React.createClass({
 	            </div>
 	            <div className="panel-body">
 	                <div className="inbox-widget slimscroll">
-	                    <a href="#">
-	                        <div className="inbox-item">
-	                            <div className="inbox-item-img"><img src="assets/images/avatar2.png" className="img-circle" alt=""/></div>
-	                            <p className="inbox-item-author">Sandra Smith</p>
-	                            <p className="inbox-item-text">Hey! I'm working on your...</p>
-	                            <p className="inbox-item-date">13:40 PM</p>
-	                        </div>
-	                    </a>
-	                    <a href="#">
-	                        <div className="inbox-item">
-	                            <div className="inbox-item-img"><img src="assets/images/avatar3.png" className="img-circle" alt=""/></div>
-	                            <p className="inbox-item-author">Christopher</p>
-	                            <p className="inbox-item-text">I've finished it! See you so...</p>
-	                            <p className="inbox-item-date">13:34 PM</p>
-	                        </div>
-	                    </a>
-	                    <a href="#">
-	                        <div className="inbox-item">
-	                            <div className="inbox-item-img"><img src="assets/images/avatar4.png" className="img-circle" alt=""/></div>
-	                            <p className="inbox-item-author">Amily Lee</p>
-	                            <p className="inbox-item-text">This theme is awesome!</p>
-	                            <p className="inbox-item-date">13:17 PM</p>
-	                        </div>
-	                    </a>
-	                    <a href="#">
-	                        <div className="inbox-item">
-	                            <div className="inbox-item-img"><img src="assets/images/avatar5.png" className="img-circle" alt=""/></div>
-	                            <p className="inbox-item-author">Nick Doe</p>
-	                            <p className="inbox-item-text">Nice to meet you</p>
-	                            <p className="inbox-item-date">12:20 PM</p>
-	                        </div>
-	                    </a>
-	                    <a href="#">
-	                        <div className="inbox-item">
-	                            <div className="inbox-item-img"><img src="assets/images/avatar2.png" className="img-circle" alt=""/></div>
-	                            <p className="inbox-item-author">Sandra Smith</p>
-	                            <p className="inbox-item-text">Hey! I'm working on your...</p>
-	                            <p className="inbox-item-date">10:15 AM</p>
-	                        </div>
-	                    </a>
-	                    <a href="#">
-	                        <div className="inbox-item">
-	                            <div className="inbox-item-img"><img src="assets/images/avatar4.png" className="img-circle" alt=""/></div>
-	                            <p className="inbox-item-author">Amily Lee</p>
-	                            <p className="inbox-item-text">This theme is awesome!</p>
-	                            <p className="inbox-item-date">9:56 AM</p>
-	                        </div>
-	                    </a>
+	                	 {this.props.dataset.map((item)=>{
+	                		 return(
+	                			<div className="inbox-item">
+	 			                    <div className="inbox-item-img"><img src="ELCModule/images/icon.png" /></div>
+	 			                    <p className="inbox-item-author">{item.service_name}</p>
+	 			                    <p className="inbox-item-text">{item.table_num}</p>
+	 			                    <p className="inbox-item-date">{item.call_time}</p>
+	 			                </div>
+	                		)
+	                		 
+	                	 })}
+			             
 	                </div>
 	            </div>
 	        </div>

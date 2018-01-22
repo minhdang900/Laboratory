@@ -1,4 +1,9 @@
 window.ChartJS = React.createClass({
+	getInitialState: function(){
+		return {
+			chart: null
+		}
+	},
 	componentWillMount: function(){
 	},
 	componentDidMount: function(){
@@ -38,6 +43,16 @@ window.ChartJS = React.createClass({
 	        legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
 	        responsive: true
 	    });
+	    this.setState({chart: chart});
+	},
+	componentWillUpdate: function(nextProps, nextState){
+		let chart = this.state.chart;
+		if(chart != null){
+			console.log(nextProps.labels);
+			chart.labels = nextProps.labels;
+			chart.datasets = nextProps.datasets;
+			chart.update({duration: 0});
+		}
 	},
 	componentWillUnmount: function(){
 	},

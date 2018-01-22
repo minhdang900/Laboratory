@@ -14,16 +14,16 @@ window.Router = React.createClass({
 	  componentWillUpdate: function(){
 		  
 	  },
-	 componentDidMount: function(){
-		 
-	 },
+	  componentDidMount: function(){
+		 console.log("This is router");
+	  },
 	render: function(){
-		if(true){
+		if(common.isLogin){
 			return(
 				<ReactRouter.Redirect to="/dashboard"/>
 			);
 		} else {
-			return(<ReactRouter.Redirect to="/login"/>)
+			return(<ReactRouter.Redirect to="login"/>)
 		}
 	}
 })

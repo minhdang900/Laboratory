@@ -23,16 +23,8 @@ window.MorrisJS = React.createClass({
 		} else if(this.props.type =="column"){
 			 Morris.Bar({
 			        element: this.props.id,
-			        data: [
-			            { year: '2006', a: 25, b: 15 },
-			            { year: '2007', a: 50, b: 40 },
-			            { year: '2008', a: 75, b: 65 },
-			            { year: '2009', a: 100, b: 90 },
-			            { year: '2010', a: 60, b: 50 },
-			            { year: '2011', a: 75, b: 65 },
-			            { year: '2012', a: 100, b: 90 } 
-			        ],
-			        xkey: 'year',
+			        data: this.props.data,
+			        xkey: 'x',
 			        ykeys: ['a', 'b'],
 			        labels: ['a', 'b'],
 			        barRatio: 0.4,

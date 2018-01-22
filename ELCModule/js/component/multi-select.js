@@ -11,25 +11,47 @@ window.MultiSelect = React.createClass({
 	},
 	componentDidMount: function(){
 		var _ = this; 
-		  $('#' + this.props.id).multiselect({
-            nonSelectedText: 'Select expertise!',
-            buttonWidth: '100%',
-            includeSelectAllOption: true,
-            enableFiltering: true
-        });
+		$('#' + this.props.id).multiselect({
+	        nonSelectedText: this.props.nonSelectedText,
+	        nSelectedText: this.props.nSelectedText,
+	        allSelectedText: this.props.allSelectedText,
+	        buttonWidth: '100%',
+	        includeSelectAllOption: true,
+	        enableFiltering: true,
+	        onChange: function(element, checked){
+	        	_.props.onChange(element, checked);
+	        },
+	        onSelectAll: function(){
+	        	console.log($('#' + _.props.id).multiselect('getSelected'));
+	        	_.props.onSelectAll();
+	        },
+	        onDeselectAll: function(){
+	        	
+	        }
+	    });
+        $('#' + this.props.id).multiselect('dataprovider', this.props.options);
+        var checkBox = $("input[type=checkbox]:not(.switchery), input[type=radio]:not(.no-uniform)");
+		if (checkBox.size() > 0) {
+		    checkBox.each(function() {
+		        $(this).uniform();
+		    });
+		};
+	},
+	componentWillUpdate: function(nextProps, nextState){
+		$('#' + this.props.id).multiselect('dataprovider', nextProps.options);
+        var checkBox = $("input[type=checkbox]:not(.switchery), input[type=radio]:not(.no-uniform)");
+		if (checkBox.size() > 0) {
+		    checkBox.each(function() {
+		        $(this).uniform();
+		    });
+		};
 	},
 	componentWillUnmount: function(){
 		
 	},
 	render: function(){
 		return(
-			<select id={this.props.id} multiple={this.props.multiple?"multiple":""}>
-	            {this.props.options.map(function(item){
-	            	return(
-	            		<option key={"option_" + item.id} value={item.text}>{item.text}</option>
-	            	);
-	            })}
-	         </select>
+			<select id={this.props.id} multiple={this.props.multiple?"multiple":""}></select>
 		);
 	}
 });

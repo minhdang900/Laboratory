@@ -2,14 +2,15 @@
 ReactDOM.render((
 		   <ReactRouterDOM.HashRouter>
 			   	<div>
-				  {/*<ReactRouterDOM.Route exact path="/" render={() => (
-				   			true ?(<ReactRouter.Redirect to="/dashboard"/>) : (<Login />)
+				  {/*<ReactRouterDOM.Route path="/" render={() => (
+				   		common.isLogin ?(<ReactRouter.Redirect to="/dashboard"/>) : (<Login />)
 				  )}/>*/}
 				  <ReactRouterDOM.Route exact path="/" component={Router}/>
 				  <ReactRouterDOM.Route path="/login" component={Login}/>
 				  <ReactRouterDOM.Route path="/dashboard" component={Home}/>
 				  <ReactRouterDOM.Route path="/report" component={Report}/>
-			    </div>
+				  <ReactRouterDOM.Route path="/history" component={History}/>
+				</div>
 		  </ReactRouterDOM.HashRouter>), document.getElementById('elcom_esmile_iot'));
 /**
  * 
@@ -61,46 +62,7 @@ $(function(){
 	    var switchery = new Switchery(html, { color: '#23B7E5' });
 	});
 
-	// Element Blocking
-	function blockUI(item) {    
-	    $(item).block({
-	        message: '<img src="ELCommon/images/reload.gif" width="20px" alt="">',
-	        css: {
-	            border: 'none',
-	            padding: '0px',
-	            width: '20px',
-	            height: '20px',
-	            backgroundColor: 'transparent'
-	        },
-	        overlayCSS: {
-	            backgroundColor: '#fff',
-	            opacity: 0.9,
-	            cursor: 'wait'
-	        }
-	    });
-	}
-
-	function unblockUI(item) {
-	    $(item).unblock();
-	}  
-
-	// Panel Control
-	$('.panel-collapse').click(function(){
-	    $(this).closest(".panel").children('.panel-body').slideToggle('fast');
-	});
-
-	$('.panel-reload').click(function() { 
-	    var el = $(this).closest(".panel").children('.panel-body');
-	    blockUI(el);
-	    window.setTimeout(function () {
-	        unblockUI(el);
-	    }, 1000);
-
-	}); 
-
-	$('.panel-remove').click(function(){
-	    $(this).closest(".panel").hide();
-	});
+	
 
 	// Push Menu
 	$('.push-sidebar').click(function(){
@@ -128,12 +90,7 @@ $(function(){
 	});
 
 	// Uniform
-	var checkBox = $("input[type=checkbox]:not(.switchery), input[type=radio]:not(.no-uniform)");
-	if (checkBox.size() > 0) {
-	    checkBox.each(function() {
-	        $(this).uniform();
-	    });
-	};
+	
 
 	// .toggleAttr() Function
 	$.fn.toggleAttr = function(a, b) {
@@ -285,7 +242,7 @@ $(function(){
 	            boxedLayoutCheck.click();
 	        }
 	    
-	        $(".theme-color").attr("href", 'assets/css/themes/white.css');
+	        //$(".theme-color").attr("href", 'assets/css/themes/white.css');
 	       
 	        sidebarAndContentHeight();
 	    },

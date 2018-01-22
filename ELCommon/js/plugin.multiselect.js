@@ -1,5 +1,5 @@
 /**
- * Bootstrap Multiselect (https://github.com/davidstutz/bootstrap-multiselect)
+ * Bootstrap Multiselect (http://davidstutz.de/bootstrap-multiselect/)
  *
  * Apache License, Version 2.0:
  * Copyright (c) 2012 - 2015 David Stutz
@@ -362,13 +362,13 @@
              * Triggered on select all.
              */
             onSelectAll: function() {
-
+            	console.log('select all');
             },
             /**
              * Triggered on deselect all.
              */
             onDeselectAll: function() {
-
+            	console.log('deselect all');
             },
             /**
              * Triggered after initializing.
@@ -588,6 +588,7 @@
                         this.selectAll(this.options.selectAllJustVisible, true);
                     }
                     else {
+                    	
                         this.deselectAll(this.options.selectAllJustVisible, true);
                     }
                 }
@@ -1328,7 +1329,7 @@
             if(justVisible) {
                 $('input:enabled' , visibleLis).prop('checked', true);
                 visibleLis.addClass(this.options.selectedClass);
-
+                visibleLis.find('span').addClass('checked');
                 $('input:enabled' , visibleLis).each($.proxy(function(index, element) {
                     var value = $(element).val();
                     var option = this.getOptionByValue(value);
@@ -1373,7 +1374,7 @@
             if(justVisible) {
                 $('input[type="checkbox"]:enabled' , visibleLis).prop('checked', false);
                 visibleLis.removeClass(this.options.selectedClass);
-
+                visibleLis.find('span').removeClass('checked');
                 $('input[type="checkbox"]:enabled' , visibleLis).each($.proxy(function(index, element) {
                     var value = $(element).val();
                     var option = this.getOptionByValue(value);
@@ -1634,7 +1635,6 @@
          * @returns {jQuery}
          */
         getOptionByValue: function (value) {
-
             var options = $('option', this.$select);
             var valueToCompare = value.toString();
 
@@ -1653,7 +1653,6 @@
          * @returns {jQuery}
          */
         getInputByValue: function (value) {
-
             var checkboxes = $('li input:not(.multiselect-search)', this.$ul);
             var valueToCompare = value.toString();
 
