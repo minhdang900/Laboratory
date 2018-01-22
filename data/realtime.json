@@ -1,0 +1,11 @@
+{
+	"status_code": 200, 
+	"message":"OK", 
+	"data":[
+	        {"table_id": "101","table_name": "101", "service_name":"BILL", "called_num": 3, "call_time": "17:05", "wait_time":"02:12", "like": 0, "dislike": 3},
+	        {"table_id": "101","table_name": "101", "service_name":"BILL", "called_num": 3, "call_time": "17:05", "wait_time":"02:12", "like": 0, "dislike": 3},
+	        {"table_id": "101","table_name": "101", "service_name":"BILL", "called_num": 3, "call_time": "17:05", "wait_time":"02:12", "like": 0, "dislike": 3},
+	        {"table_id": "101","table_name": "101", "service_name":"BILL", "called_num": 3, "call_time": "17:05", "wait_time":"02:12", "like": 0, "dislike": 3},
+	        {"table_id": "101","table_name": "101", "service_name":"BILL", "called_num": 3, "call_time": "17:05", "wait_time":"02:12", "like": 0, "dislike": 3}
+	       ]
+}

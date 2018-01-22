@@ -1,0 +1,9 @@
+{
+	"status_code": 200, "message":"OK", 
+	"data":[
+	        {"date_time":"10/12/2017", "wait_time": 5}, 
+	        {"date_time":"11/12/2017", "wait_time": 10},
+	        {"date_time":"12/12/2017", "wait_time": 20},
+	        {"date_time":"13/12/2017", "wait_time": 5}
+	       ]
+}

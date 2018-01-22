@@ -1,0 +1,14 @@
+{
+	"status_code": "200",
+	"data": [
+	         {
+	        	 "tables": [{"wait_time": "00:01:00", "like": "6","dislike": "1","table_id": "111111","table_name": "Table 001"}, {"wait_time": "00:00:30", "like": "7","dislike": "3","table_id": "111111","table_name": "Table 002"}],
+	        	 "date_time": "01/01/2018"
+	         },
+	         {
+	        	 "tables": [{"wait_time": "00:02:00", "like": "10","dislike": "0","table_id": "111111","table_name": "Table 001"}, {"wait_time": "00:00:59", "like": "5","dislike": "1","table_id": "111111","table_name": "Table 002"}],
+	        	 "date_time": "02/01/2018"
+	         }
+	        ],
+	"message": "OK"
+}

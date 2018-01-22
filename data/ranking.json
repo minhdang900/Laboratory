@@ -1,0 +1,8 @@
+{
+	"status_code": 200, "message":"OK", 
+	"data":[
+	        {"date_time":"11/11/2017", "like": 50, "dislike": 10}, 
+	        {"date_time":"12/11/2017", "like": 20, "dislike": 1},
+	 		{"date_time":"13/11/2017", "like": 40, "dislike": 4}
+	       ]
+}
