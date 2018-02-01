@@ -21,7 +21,11 @@ window.DateRangePicker = React.createClass({
 		    var end = moment();
 		    var _=this;
 		    function cb(start, end) {
-		        $('#'+ _.props.id + ' span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
+		    	if(_.props.timePicker){
+		    		$('#'+ _.props.id + ' span').html(start.format('DD/MM/YYYY h:mm A') + ' - ' + end.format('DD/MM/YYYY h:mm A'));
+		    	} else {
+		    		$('#'+ _.props.id + ' span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
+		    	}
 		        _.props.onChange(start, end);
 		    }
 		    $('#'+ this.props.id).daterangepicker({
@@ -35,10 +39,10 @@ window.DateRangePicker = React.createClass({
 		           'This Month': [moment().startOf('month'), moment().endOf('month')],
 		           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
 		        },
-		        timePicker: false,
+		        timePicker: this.props.timePicker || false,
 		        timePickerIncrement: 30,
 		        locale: {
-		            format: 'DD/MM/YYYY'//'DD/MM/YYYY h:mm A'
+		            format: this.props.format || 'DD/MM/YYYY'//'DD/MM/YYYY h:mm A'
 		        }
 		    }, cb);
 		    cb(start, end);

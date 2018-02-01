@@ -16,16 +16,15 @@ window.History = React.createClass({
 	    return {
 	    	datatable: null,
 	    	dataset: [ // state data of datatable real-time
-				       ["", "01", "BILL", "0", "00:00", "00:00"]
+				    
 			],
 			columns: [
 			    { title: "Date Time" },
 	            { title: "Table Name" },
-	            { title: "Service Name" },
-	            { title: "Called" },
-	            { title: "Call Time" },
-	            { title: "Wait Time" }
+	            { title: "Service Name" }
 	        ],
+	        start_date: moment().subtract(6, 'days'),
+	        end_date: moment(),
 		    store: [],
 		    table: [],
 		    store_element: 'history-store-id',
@@ -110,6 +109,10 @@ window.History = React.createClass({
 		  console.log('table select all');
 	  },
 	  dateChange: function(start, end){
+		  this.setState({
+			  start_date: start,
+			  end_date: end
+		  });
 		  this.getHistory();
 	  },
 	  getStore: function(callback){
@@ -153,8 +156,8 @@ window.History = React.createClass({
 	  },
 	  getHistory: function(){
 		  	var _=this;
-		  	var start = moment().subtract(6, 'days'); //Last 7 Days
-		    var end = moment();
+		  	var start = _.state.start_date;
+		    var end = _.state.end_date;
 		    var tables = [];
 		    var stores = [];
 		    $('#' + _.state.store_element).multiselect('getSelected').each(function(){
@@ -164,8 +167,8 @@ window.History = React.createClass({
 		    	tables.push($(this).val());
 		    });
 
-		  	let data = {"store_id": stores.toString(), "table": tables.toString(), "from": start.format('DD/MM/YYYY HH:MM'), "to": end.format('DD/MM/YYYY HH:MM')}
-			common.request({url: common.api.history(), data: data}, (response)=>{
+		  	let data = {"store_id": stores.toString(),"table_id": tables.toString(), "from": start.format('DD/MM/YYYY HH:MM'), "to": end.format('DD/MM/YYYY HH:MM')}
+			common.request({url: common.api.history(), data: data, type:"POST"}, (response)=>{
 				if(response.status_code == 200){
 					let length = response.data.length;
 					let data = response.data;
@@ -175,9 +178,6 @@ window.History = React.createClass({
 						tmp.push(data[i].date_time);
 						tmp.push(data[i].table_name);
 						tmp.push(data[i].service_name);
-						tmp.push(data[i].called_num.toString());
-						tmp.push(data[i].call_time);
-						tmp.push(data[i].wait_time);
 						dataset.push(tmp);
 					}
 					_.setState({
@@ -208,14 +208,14 @@ window.History = React.createClass({
 					       	  			table_element={this.state.table_element} 
 					       	  			store={this.state.store} 
 					       	  			table={this.state.table}
-					       	  			dateChange={this.dateChange}/>
+					       	  			dateChange={this.dateChange}
+					       	  			format = {"DD/MM/YYYY h:mm A"} timePicker={true}/>
 					          <div data-page="index" className="page">
 						        <div id="history-page-content" className="page-content" style={{"background": "transparent", "box-shadow": "none"}}>
 						        	<div className="panel panel-white">
 						            	<div className="panel-heading">
 							            	<h3 className="panel-title"></h3>
 											<div className="panel-control">
-								                <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Expand/Collapse" className="panel-collapse"><i className="icon-arrow-down"></i></a>
 								                <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Reload" className="panel-reload"><i className="icon-reload"></i></a>
 								                <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Remove" className="panel-remove"><i className="icon-close"></i></a>
 								            </div>

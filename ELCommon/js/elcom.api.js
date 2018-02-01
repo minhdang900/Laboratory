@@ -16,7 +16,7 @@ API.prototype = {
 			return this.ip.concat(":", this.port, "/esmile_iot/admin/gettable"); // this.ip.concat(":", this.port, "/admin/data/table.json");
 		},
 		history: function(){
-			return this.ip.concat(":", this.port, "/admin/data/history.json"); // this.ip.concat(":", this.port, "/admin/data/history.json");
+			return this.ip.concat(":", this.port, "/esmile_iot/admin/gethistory"); // this.ip.concat(":", this.port, "/admin/data/history.json");
 		},
 		service: function(){
 			return  this.ip.concat(":", this.port, "/esmile_iot/admin/getrealtime"); // this.ip.concat(":", this.port, "/admin/data/realtime.json");

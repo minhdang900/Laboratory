@@ -37,11 +37,21 @@ window.Activity = React.createClass({
 	            <div className="panel-body">
 	                <div className="inbox-widget slimscroll">
 	                	 {this.props.dataset.map((item)=>{
+	                		 let icon = <img src="ELCModule/images/icon.png" />;
+	                		 if(item.service_name == 'ORDER'){
+	                			 icon = <i className="fa fa-cutlery fa-3x" aria-hidden="true" style={{"color": "rgb(34, 186, 160)"}}></i>
+	                		 } else if(item.service_name == 'BILL'){
+	                			 icon = <i className="fa fa-file-text-o fa-3x" aria-hidden="true" style={{"color": "rgb(34, 186, 160)"}}></i>
+	                		 } else if(item.service_name == 'LIKE'){
+	                			 icon = <i className="fa fa-thumbs-up faa-bounce animated fa-3x" aria-hidden="true" style={{"color": "rgb(122, 111, 190)"}}></i>
+	                		 } else if(item.service_name == 'DISLIKE'){
+	                			 icon = <i className="fa fa-thumbs-down fa-3x" aria-hidden="true" style={{"color": "rgb(242, 86, 86)"}}></i>
+	                		 } 
 	                		 return(
 	                			<div className="inbox-item">
-	 			                    <div className="inbox-item-img"><img src="ELCModule/images/icon.png" /></div>
-	 			                    <p className="inbox-item-author">{item.service_name}</p>
-	 			                    <p className="inbox-item-text">{item.table_num}</p>
+	 			                    <div className="inbox-item-img">{icon}</div>
+	 			                    <p className="inbox-item-author">{item.table_name}</p>
+	 			                    <p className="inbox-item-text" style={{"color": "#000", "font-size": "15px"}}>{item.service_name}</p>
 	 			                    <p className="inbox-item-date">{item.call_time}</p>
 	 			                </div>
 	                		)

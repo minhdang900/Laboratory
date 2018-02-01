@@ -24,12 +24,9 @@ window.Header = React.createClass({
 		                  <div className="top-menu">
 		                      <ul className="nav navbar-nav navbar-left">
 		                          <li>		
-		                              <ReactRouterDOM.Link to="javascript:void(0);" className="waves-effect waves-button waves-classic sidebar-toggle"><i className="fa fa-bars"></i></ReactRouterDOM.Link>
+		                              <ReactRouterDOM.Link to="/dashboard" className="waves-effect waves-button waves-classic sidebar-toggle"><i className="fa fa-bars"></i></ReactRouterDOM.Link>
 		                          </li>
-		                          <li>		
-		                              <ReactRouterDOM.Link to="javascript:void(0);" className="waves-effect waves-button waves-classic toggle-fullscreen"><i className="fa fa-expand"></i></ReactRouterDOM.Link>
-		                          </li>
-		                          
+		                         
 		                          <li>
 		                           <ReactRouterDOM.Link to="/dashboard" className="waves-effect waves-button waves-classic" 
 		                          		style={this.props.index==1?{"padding": "10px 18px", "text-align": "center", "background": "#337ab7", "color": "#fff"}:{"padding": "10px 18px", "text-align": "center"}}>

@@ -4,6 +4,7 @@
 **/
 var express = require("express");
 var request = require('request');
+
 var app     = express();
 var server = require('http').createServer(app);  
 var io = require('socket.io')(server);
@@ -20,9 +21,9 @@ app.use(bodyparser.urlencoded({extended: true}));
 app.use(bodyparser.json());
 app.use(cors());
 app.use(express.static(__dirname));
-
+var ipAddr = 'http://172.16.9.188:8123';
 /**
-Start Handle HTMT Template Page
+ Start Handle HTMT Template Page
 **/
 var pathTemplate = path.join(__dirname,'esignage/templateEvent');
 var tempName = "";
@@ -39,7 +40,7 @@ app.get('/getFileName', function(req, res){
                var json = {status: 1, message: tempName};
                res.send(JSON.stringify(json));
                tempName = "";
-       }else {
+       } else {
                var json = {status: 0, message: 'file not save'};
                res.send(JSON.stringify(json));
        }
@@ -91,58 +92,107 @@ io.sockets.on('connection', function(socket){
 		  // add username
 		  client[username] = socket.id;
 	  });
-	  socket.on("service", function(data) {
+	  socket.on("service", function(data, callback) {
 	    // Fetch the socket id from Redis
 //	    client.get(data.username, function(err, socketId) { 
 //	      if (err) throw err;
 //	      io.sockets.socket(socketId).emit('service', data);
 //	    }); 
 		  console.log('Input >>', data);
+		  console.log('client >>', client);
 		  request({
-			    url: 'http://172.16.9.188:8123/esmile_iot/admin/getrealtime',
+			    uri: ipAddr + '/esmile_iot/admin/getrealtime',
 			    method: 'POST',
-			    body: JSON.stringify(data),
-//			    json: true,
-			    headers: {'Content-Type':'application/json'},
+			    body: JSON.stringify({'username':data.user_name, 'store_id': data.store_id}),
+			    headers: {'content-type':'application/json'}
 			  }, function(error, response, body){
 					if(error){
 						return error;
 					} else {
-						console.log(body);
-						console.log(response);
-						//var data = JSON.parse(body);
+						var data = JSON.parse(body);
+//						console.log(data);
 						if(data.status_code == 200){
 							var socketId = client[data.username];
-							io.sockets.socket(socketId).emit('service', data); 
+//							io.sockets.clients(socketId).emit('service_response', data); 
+							console.log('send data service to socket id', socket.id);
+							return callback(data);
 						}
 					}
 	    		});
 	  });
-	  socket.on("quickstats", function(data) {
+	  socket.on("quickstats", function(data, callback) {
 	    // Fetch the socket id from Redis
 //	    client.get(data.username, function(err, socketId) {
 //	      if (err) throw err;
 //	      io.sockets.socket(socketId).emit('quickstats', data);
 //	    });
-//		  console.log('Input >>', data);
-//		  request.post('http://172.16.9.188:8123/esmile_iot/admin/getquickstats', 
-//			    {form: data}, 
-//				function(error, response, body){
-//					if(error){
-//						console.log(error);
-//						return;
-//					} else {
-//						console.log(body);
-//						var data = JSON.parse(body);
-//						if(data.status_code == 200){
-//							 var socketId = client[data.username];
-//							 io.sockets.socket(socketId).emit('quickstats', data);
-//						}
-//					}
-//	    		});
+		  console.log('Input >>', data);
+		  request.post({
+			    uri: ipAddr + '/esmile_iot/admin/getquickstats',
+			    method: 'POST',
+			    body: JSON.stringify({"user_id": data.user_id, "store_id":data.store_id, "from": data.from, "to": data.to}),
+			    headers: {'content-type':'application/json'}
+			  }, 
+			  function(error, response, body){
+					if(error){
+						console.log(error);
+						return;
+					} else {
+						var data = JSON.parse(body);
+						if(data.status_code == 200){
+							 var socketId = client[data.username];
+							 console.log('send data quickstats to socket id', socket.id);
+							 return callback(data);
+						}
+					}
+	    		});
 		 
 	  });
+	  socket.on("waittime", function(data, callback) {
+		  console.log('Input >>', data);
+		  request.post({
+			    uri: ipAddr + '/esmile_iot/admin/sumwait',
+			    method: 'POST',
+			    body: JSON.stringify({"store_id": data.store_id, "table_id": data.table_id, "from": data.from, "to": data.to}),
+			    headers: {'content-type':'application/json'}
+			  }, 
+			  function(error, response, body){
+					if(error){
+						console.log(error);
+						return;
+					} else {
+						var data = JSON.parse(body);
+						if(data.status_code == 200){
+							 var socketId = client[data.username];
+							 console.log('send data waittime to socket id', socket.id);
+							 return callback(data);
+						}
+					}
+	    		});
+	   });
+	  socket.on("ranking", function(data, callback) {
+		  console.log('Input >>', data);
+		  request.post({
+			    uri: ipAddr + '/esmile_iot/admin/sumlike',
+			    method: 'POST',
+			    body: JSON.stringify({"store_id": data.store_id, "table_id": data.table_id, "from": data.from, "to": data.to}),
+			    headers: {'content-type':'application/json'}
+			  }, 
+			  function(error, response, body){
+					if(error){
+						console.log(error);
+						return;
+					} else {
+						var data = JSON.parse(body);
+						if(data.status_code == 200){
+							 var socketId = client[data.username];
+							 console.log('send data ranking to socket id', socket.id);
+							 return callback(data);
+						}
+					}
+	    		});
+	   });
 	});
-server.listen(6780, function(){
+server.listen(6789, function(){
 	console.log('Server listening on port ' + server.address().port);
 });

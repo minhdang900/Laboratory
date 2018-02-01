@@ -4,7 +4,8 @@ window.FilterBar  = React.createClass({
 		return {
 		}
 	},
-	exportPDF: function(){
+	exportPDF: function(ev){
+		console.log((ev));
 		if(typeof(this.props.data) != undefined){
 			this.pdfMaker();
 		} else {
@@ -66,7 +67,7 @@ window.FilterBar  = React.createClass({
 		     				options={this.props.table}/>
 		     		</div>
 		     		<div className="col-md-4">
-		     			<DateRangePicker onChange={this.props.dateChange} id={"report_daterangepicker"}/>
+		     			<DateRangePicker onChange={this.props.dateChange} id={"report_daterangepicker"} format = {this.props.format} timePicker={this.props.timePicker}/>
 		     		</div>
 		     		<div className={this.props.isExport?"col-md-4 text-right":"hidden"}>
 		     			<div className="btn-group">

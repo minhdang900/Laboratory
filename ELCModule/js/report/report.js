@@ -56,7 +56,7 @@ window.Report = React.createClass({
 			  _.getWaitTime();
 			  _.getRanking();
 			  _.getInfoTable();
-		  },500);
+		  },1000);
 	  },
 	  componentWillUpdate: function(nextProps, nextState){
 		  
@@ -181,7 +181,7 @@ window.Report = React.createClass({
 					let datasets = [];
 					for(let i = 0; i < length; i++){
 						labels.push(data[i].date_time);
-						datasets.push(data[i].wait_time);
+						datasets.push(Number(data[i].wait_time));
 					}
 					_.setState({
 						dataSumTime:{
@@ -214,8 +214,8 @@ window.Report = React.createClass({
 					let dislikes = [];
 					for(let i = 0; i < length; i++){
 						categories.push(data[i].date_time);
-						likes.push(data[i].like);
-						dislikes.push(data[i].dislike);
+						likes.push(Number(data[i].like));
+						dislikes.push(Number(data[i].dislike));
 					}
 					_.setState({
 						dataSumRanking:{
@@ -293,7 +293,7 @@ window.Report = React.createClass({
 					       	  			table_element={this.state.table_element} 
 					       	  			store={this.state.store} 
 					       	  			table={this.state.table}
-					       	  			dateChange={this.dateChange}/>
+					       	  			dateChange={this.dateChange} format = {"DD/MM/YYYY"}/>
 					          <div data-page="index" className="page">
 						        <div id="page-content" className="page-content" style={{"background": "transparent", "box-shadow": "none"}}>
 						           <div className="">
@@ -322,7 +322,7 @@ window.Report = React.createClass({
 							        	<div className="row">
 							                <div className="col-lg-6 col-md-6">
 							                	<HighCharts 
-							                	    type={"bar"}
+							                	    type={"line"}
 							                		title={"Waiting Time"} 
 							                		id={"report_hchart_01"} 
 							                		yAxis = {"Time (minus)"}

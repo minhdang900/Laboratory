@@ -44,7 +44,7 @@ window.Service = React.createClass({
 	        let store_id = $(data[5]).data('store');
 	        let table_id = $(data[5]).data('table');
 	        let service_name = $(data[5]).data('service');
-	        let status = $(data[5]).data('status');
+	        let status = $(data[5]).attr('data-status');
 	        _.sendDone(this, store_id, table_id, service_name, status);
 	        
 	    });
@@ -52,7 +52,7 @@ window.Service = React.createClass({
 	sendDone: function($this, store_id, table_id, service_name, status){
 		var _=this;
 		var data = {"store_id":store_id,"table_id": table_id, "status": status, "service_name":service_name};
-		common.request({url: common.api.done(), type:"post", data:data}, (response)=>{
+		common.request({url: common.api.done(), type:"POST", data:data}, (response)=>{
 			if(response.status_code == 200){
 				 toastr.options = {
 		            closeButton: true,
@@ -62,7 +62,14 @@ window.Service = React.createClass({
 		            timeOut: 2000
 		        };
 		        toastr.success('Data updated success', 'Done');
-				$($this).html('<i class="fa fa-check-circle" aria-hidden="true"></i> Done');
+		        if(status == 1){
+					 var cell = _.state.datatable.cell($($this).parent().parent());
+				     cell.data('<div data-status="0" data-table="'+table_id+'" data-service="'+service_name+'" data-store="'+store_id+'"><button type="button" class="btn btn-success"><i class="fa fa-check-circle" aria-hidden="true"></i> Done</button></div>').draw();
+		        } else {
+					 var cell = _.state.datatable.cell($($this).parent().parent());
+					 cell.data('<div data-status="1" data-table="'+table_id+'" data-service="'+service_name+'" data-store="'+store_id+'"><button type="button" class="btn btn-warning"><i class="fa fa-spinner faa-spin animated" aria-hidden="true"></i> Processing</button></div>').draw();
+		        }
+		        
 			}
 		});
 	},
@@ -80,7 +87,6 @@ window.Service = React.createClass({
             	<div className="panel-heading">
 	            	<h3 className="panel-title"></h3>
 					<div className="panel-control">
-		                <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Expand/Collapse" className="panel-collapse"><i className="icon-arrow-down"></i></a>
 		                <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Reload" className="panel-reload"><i className="icon-reload"></i></a>
 		                <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Remove" className="panel-remove"><i className="icon-close"></i></a>
 		            </div>
