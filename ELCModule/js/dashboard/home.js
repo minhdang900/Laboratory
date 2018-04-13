@@ -41,8 +41,8 @@ window.Home = React.createClass({
 	componentWillMount: function(){
 		var _=this;
 		common.socket = io();
-		common.socket.emit('user', common.getSession().user_name);
-		common.socket.on('service_response', _.realSerevice);
+//		common.socket.emit('user', common.getSession().user_name);
+//		common.socket.on('service_response', _.realSerevice);
 //		common.socket.on('quickstats', _.realQuickStats); 
 		this.getStore(this.getTable);
 	},
